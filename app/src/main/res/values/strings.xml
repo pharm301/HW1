@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">HW1</string>
+
+    <string name="button_text">Детали</string>
+
+    <string name="film1">Мандолорец</string>
+    <string name="film2">Игра престолов</string>
+    <string name="film3">Терминатор</string>
+    <string name="film4">Звездные войны</string>
+
+    <string name="descr4">В далекой далекой галактике...</string>
+    <string name="descr3">Скайнет делает вторую попытку уничтожить Джона Конора</string>
+    <string name="descr2">История выдуманного мира от известного ватаката в жанре фентази</string>
+    <string name="descr1">В далекой далекой галактике, после победы Повстанцев над флотом Империи...</string>
+
+    <string name="title_activity_main2">MainActivity</string>
+    <string name="hello_world">Hello Square World!</string>
+
+</resources>
