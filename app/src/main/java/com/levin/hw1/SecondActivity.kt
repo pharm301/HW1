@@ -2,43 +2,90 @@ package com.levin.hw1
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.drawable.Drawable
 //import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.util.Log
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
 class SecondActivity: AppCompatActivity() {
-    var filmID : Int = 0
-
     companion object {
+        var filmID : Int = 0
+        var isLiked : Int = 0
+        var myCom = ""
 
-        fun launchActivity (activity: Activity, myID : Int) {
+        fun launchActivity (activity: Activity, myREQUEST : Int, myID : Int, isLike : Int, myCom : String) {
             Intent (activity,SecondActivity::class.java).apply {
                 putExtra ("filmID",myID)
-                activity.startActivity(this)
+                putExtra("isLike", isLike)
+                putExtra("myCom", myCom)
+                activity.startActivityForResult(this, myREQUEST)
             }
         }
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val chkBox by lazy {
+        findViewById<CheckBox>(R.id.checkBox)
+    }
+    private val textViewFilmDesc by lazy {
+        findViewById<TextView>(R.id.textView)
+    }
+    private val imageViewPoster by lazy {
+        findViewById<ImageView>(R.id.imageView)
+    }
+    private val editTextComment by lazy {
+        findViewById<EditText>(R.id.editTextTextMultiLine)
+    }
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.secondactivity)
         filmID = intent.getIntExtra("filmID",4)
-        println(filmID)
+        isLiked = intent.getIntExtra("isLike",0)
+        myCom = intent.getStringExtra("myCom").toString()
+
+        if (isLiked == 1) chkBox.isChecked = true
+        myCom = intent.getStringExtra("myCom").toString()
+        editTextComment.setText(myCom.toCharArray(),0,myCom.length)
+
+
+      Log.i ("PHENOMEN 2 isLiked", isLiked.toString())
+      Log.i ("PHENOMEN 2 myCom", myCom)
+
+
+        findViewById<Button>(R.id.buttonCancel).setOnClickListener {
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+        }
+        findViewById<Button>(R.id.buttonOK).setOnClickListener  {
+            setResult(Activity.RESULT_OK,Intent().apply {
+                putExtra("isLike",isLiked)
+                putExtra("myCom",editTextComment.text.toString())
+            })
+            finish()
+        }
+
+        chkBox.setOnClickListener{
+            if (chkBox.isChecked) {
+                chkBox.text= "Мне по приколу все!"
+                isLiked = 1
+            }
+            else {
+                chkBox.text= "Ты зануда!!!"
+                isLiked = 0
+            }
+        }
 
         when (filmID) {
-            1 -> {  findViewById<TextView>(R.id.textView).text = resources.getString(R.string.descr1)
-                findViewById<ImageView>(R.id.imageView).background = resources.getDrawable(R.drawable.film1,null)
+            1 -> {  textViewFilmDesc.text = resources.getString(R.string.descr1)
+                imageViewPoster.background = resources.getDrawable(R.drawable.film1,null)
                  }
-            2 -> {  findViewById<TextView>(R.id.textView).text = resources.getString(R.string.descr2)
-                    findViewById<ImageView>(R.id.imageView).background = resources.getDrawable(R.drawable.film2,null)
+            2 -> {  textViewFilmDesc.text = resources.getString(R.string.descr2)
+                imageViewPoster.background = resources.getDrawable(R.drawable.film2,null)
             }
-            3 -> {  findViewById<TextView>(R.id.textView).text = resources.getString(R.string.descr3)
-                findViewById<ImageView>(R.id.imageView).background = resources.getDrawable(R.drawable.film3,null)
+            3 -> {  textViewFilmDesc.text = resources.getString(R.string.descr3)
+                imageViewPoster.background = resources.getDrawable(R.drawable.film3,null)
             }
-            4 -> {  findViewById<TextView>(R.id.textView).text = resources.getString(R.string.descr4)
-                findViewById<ImageView>(R.id.imageView).background = resources.getDrawable(R.drawable.film4,null)
+            4 -> {  textViewFilmDesc.text = resources.getString(R.string.descr4)
+                imageViewPoster.background = resources.getDrawable(R.drawable.film4,null)
             }
 
         }
