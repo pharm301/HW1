@@ -42,13 +42,20 @@ class MainActivity : AppCompatActivity() {
            findViewById<CheckBox>(R.id.checkbox1)
        }
 
+    private fun launchFilmDetail (myID : Int, isLike : Int, myCom : String){
+        Intent (this,FilmDetailActivity::class.java).apply {
+            putExtra ("filmID",myID)
+            putExtra("isLike", isLike)
+            putExtra("myCom", myCom)
+            startActivityForResult(this, myREQUEST)
+        }
+    }
 
     private fun setLandC(isLike: Int, isCom: String) {
            if (isLike != 0) {
                checkLike.isChecked = true
                checkLike.isVisible = true
            } else {
-//                checkLike.isChecked = false
                checkLike.isVisible = false
            }
 
@@ -108,19 +115,23 @@ class MainActivity : AppCompatActivity() {
 
             findViewById<Button>(R.id.button1).setOnClickListener {
                 reSelect(1)
-                SecondActivity.launchActivity(this, myREQUEST, 1, myLike1, myComment1)
+//                FilmDetailActivity.launchActivity(this, myREQUEST, 1, myLike1, myComment1)
+                launchFilmDetail(1, myLike1, myComment1)
             }
             findViewById<Button>(R.id.button2).setOnClickListener {
                 reSelect(2)
-                SecondActivity.launchActivity(this, myREQUEST, 2, myLike2, myComment2)
+//                FilmDetailActivity.launchActivity(this, myREQUEST, 2, myLike2, myComment2)
+                launchFilmDetail(2, myLike2, myComment2)
             }
             findViewById<Button>(R.id.button3).setOnClickListener {
                 reSelect(3)
-                SecondActivity.launchActivity(this, myREQUEST, 3, myLike3, myComment3)
+//                FilmDetailActivity.launchActivity(this, myREQUEST, 3, myLike3, myComment3)
+                launchFilmDetail(3, myLike3, myComment3)
             }
             findViewById<Button>(R.id.button4).setOnClickListener {
                 reSelect(4)
-                SecondActivity.launchActivity(this, myREQUEST, 4, myLike4, myComment4)
+//                FilmDetailActivity.launchActivity(this, myREQUEST, 4, myLike4, myComment4)
+                launchFilmDetail(4, myLike4, myComment4)
             }
             findViewById<ImageView>(R.id.imageInviteFriend).setOnClickListener {
                 Toast.makeText(this, "Приглашаю друга", Toast.LENGTH_SHORT).show()

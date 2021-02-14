@@ -8,20 +8,21 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 
-class SecondActivity: AppCompatActivity() {
+class FilmDetailActivity: AppCompatActivity() {
     companion object {
-        var filmID : Int = 0
-        var isLiked : Int = 0
+        var filmID = 0
+        var isLiked = 0
         var myCom = ""
-
+/*
         fun launchActivity (activity: Activity, myREQUEST : Int, myID : Int, isLike : Int, myCom : String) {
-            Intent (activity,SecondActivity::class.java).apply {
+            Intent (activity,FilmDetailActivity::class.java).apply {
                 putExtra ("filmID",myID)
                 putExtra("isLike", isLike)
                 putExtra("myCom", myCom)
                 activity.startActivityForResult(this, myREQUEST)
             }
         }
+ */
     }
     private val chkBox by lazy {
         findViewById<CheckBox>(R.id.checkBox)
@@ -37,7 +38,7 @@ class SecondActivity: AppCompatActivity() {
     }
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.secondactivity)
+        setContentView(R.layout.activity_filmdetail)
         filmID = intent.getIntExtra("filmID",4)
         isLiked = intent.getIntExtra("isLike",0)
         myCom = intent.getStringExtra("myCom").toString()
